@@ -1,6 +1,5 @@
 package org.processmining.contexts.cli;
 
-import jargs.gnu.CmdLineParser;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
