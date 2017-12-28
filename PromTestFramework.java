@@ -414,9 +414,23 @@ public class PromTestFramework {
 	}
 	
 	private static String readFile(String scriptFile) throws IOException {
-		InputStream is = new FileInputStream("");
-		String result = readWholeStream(is);
-		is.close();
+                InputStream is = null;
+                String result = "";
+                try{
+		is = new FileInputStream("");
+		result = readWholeStream(is);
+                } catch (Exception e){
+                    System.out.println("errore");
+                } finally{
+                    if(is != null){
+                        try{
+                            is.close();
+                        } catch (Exception e){
+                            System.out.println("errore");
+                        }
+                    }
+                }
+		
 		return result;
 	}
 

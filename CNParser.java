@@ -112,9 +112,9 @@ public class CNParser {
     public Flex parse(){
         this.dictionary = new CustomDictionary<String, String>();
         Flex graph = FlexFactory.newFlex("ExtendedCausalNet");
-
+        BufferedReader br = null;
         try {
-        	BufferedReader br = new BufferedReader(new FileReader(this.filename));
+        	br = new BufferedReader(new FileReader(this.filename));
             String line = br.readLine();
 
             while (line != null) {
@@ -125,12 +125,19 @@ public class CNParser {
 
                 line = br.readLine();
             }
-            br.close();
         }
         catch(Exception e){
             System.out.println("Cannot parser file:");
             System.out.println("error");
             return null;
+        } finally {
+            if(br != null){
+                try {
+                    br.close();
+                } catch (Exception e) {
+                    System.out.println("errore");
+                }
+            }
         }
         
         this.computeBindings(graph);

@@ -214,26 +214,36 @@ public class WeightEstimator {
         if (this.depMatrix == null) {
             computeWeigths();
         }
+        BufferedWriter br = null;
         try {
-            BufferedWriter br = new BufferedWriter(new FileWriter(fileName));
+            br = new BufferedWriter(new FileWriter(fileName));
             for (int i = 0; i < this.depMatrix.length; i++) {
                 for (int j = 0; j < this.depMatrix[0].length; j++) {
                     br.append(this.depMatrix[i][j] + "\t");
                 }
                 br.newLine();
             }
-            br.close();
         } catch (IOException e) {
             System.out.println("errore");
+        } finally {
+            if(br != null){
+                try{
+                    br.close();
+                }catch(IOException e){
+                    System.out.println("errore");
+                }
+            }
         }
+        
     }
 
     public void saveDependencyMatrix(String fileName, String[] taskLabels) {
         if (this.depMatrix == null) {
             computeWeigths();
         }
+        BufferedWriter br = null;
         try {
-            BufferedWriter br = new BufferedWriter(new FileWriter(fileName));
+            br = new BufferedWriter(new FileWriter(fileName));
             br.append("\t");
             for (int i = 0; i < this.depMatrix.length; i++) {
                 br.append(taskLabels[i] + "\t");
@@ -246,10 +256,18 @@ public class WeightEstimator {
                 }
                 br.newLine();
             }
-            br.close();
         } catch (IOException e) {
             System.out.println("error");
+        } finally {
+            if(br != null){
+                try{
+                    br.close();
+                }catch(IOException e){
+                    System.out.println("errore");
+                }
+            }
         }
+        
     }
 
     public void sESC1() {
